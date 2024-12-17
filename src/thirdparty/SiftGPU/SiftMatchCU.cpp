@@ -58,12 +58,14 @@ bool SiftMatchCU::Allocate(int max_sift, int mbm) {
   for (int index = 0; index < 2; ++index) {
     if (!_texDes[index].InitTexture(8 * __max_sift, 1, 4) ||
         !_texLoc[index].InitTexture(__max_sift, 1, 2)) {
+          LOG(INFO) << "(!_texDes[index].InitTexture(8 * __max_sift, 1, 4) || !_texLoc[index].InitTexture(__max_sift, 1, 2))";
       return false;
     }
   }
 
   if (!_texDot.InitTexture(__max_sift, __max_sift) ||
       !_texMatch[0].InitTexture(__max_sift, 1)) {
+        LOG(INFO) << "(!_texDot.InitTexture(__max_sift, __max_sift) || !_texMatch[0].InitTexture(__max_sift, 1))";
     return false;
   }
 
@@ -71,6 +73,7 @@ bool SiftMatchCU::Allocate(int max_sift, int mbm) {
     const int cols = (__max_sift + MULT_BLOCK_DIMY - 1) / MULT_BLOCK_DIMY;
     if (!_texCRT.InitTexture(__max_sift, cols, 32) ||
         !_texMatch[1].InitTexture(__max_sift, 1)) {
+          LOG(INFO) << "(!_texCRT.InitTexture(__max_sift, cols, 32) || !_texMatch[1].InitTexture(__max_sift, 1))";
       return false;
     }
   }
@@ -78,6 +81,7 @@ bool SiftMatchCU::Allocate(int max_sift, int mbm) {
   _num_sift[0] = __max_sift;
   _num_sift[1] = __max_sift;
 
+  LOG(INFO) << "Pass bool SiftMatchCU::Allocate(int max_sift, int mbm)";
   return true;
 }
 

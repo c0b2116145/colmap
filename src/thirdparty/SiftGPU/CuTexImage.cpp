@@ -165,14 +165,21 @@ bool CuTexImage::InitTexture(int width, int height, int nchannel)
 	_numChannel = min(max(nchannel, 1), 4);
 
 	const size_t size = width * height * _numChannel * sizeof(float);
-
+	LOG(INFO) << StringPrintf("size_t:%dBytes", sizeof(size_t))
+  	LOG(INFO) << StringPrintf("float:%dBytes", sizeof(float))
+  	LOG(INFO) << StringPrintf("INT_MAX:%dBytes", sizeof(INT_MAX))
   if (size < 0) {
+	LOG(INFO) << "(size < 0)";
     return false;
   }
+
+  
+  
 
   // SiftGPU uses int for all indexes and
   // this ensures that all elements can be accessed.
   if (size >= INT_MAX * sizeof(float)) {
+	LOG(INFO) << "(size >= INT_MAX * sizeof(float))";
     return false;
   }
 
@@ -186,9 +193,10 @@ bool CuTexImage::InitTexture(int width, int height, int nchannel)
   if (status != cudaSuccess) {
     _cuData = NULL;
     _numBytes = 0;
+	LOG(INFO) << "(status != cudaSuccess)";
     return false;
   }
-
+  LOG(INFO) << "Pass bool CuTexImage::InitTexture(int width, int height, int nchannel)";
   return true;
 }
 
